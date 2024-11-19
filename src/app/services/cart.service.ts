@@ -26,6 +26,10 @@ export class CartService {
     return this.cartSubject.asObservable()
   }
 
+  /**
+   * Adds a new item to the cart or increments the quantity of an existing one
+   * @param item The item to add to the cart
+   */
   addToCart(item: CartItem): void {
     const currentCart = this.getCurrentCart()
     const existingItemIndex = currentCart.items.findIndex(

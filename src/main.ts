@@ -73,13 +73,16 @@ const routes: Routes = [
 })
 export class App {
   name = "BOBBYS TECH"
+  // we use observables from the auth service and use a pipe to map the user to a boolean
   isAdmin$ = this.authService.currentUser$.pipe(
     map((user) => user?.role === "admin")
   )
+
   isLoggedIn$ = this.authService.currentUser$.pipe(map((user) => user !== null))
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  // This calls the logout method from the auth service
   onSubmit() {
     this.authService.logout()
   }

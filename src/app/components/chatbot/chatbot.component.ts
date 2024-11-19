@@ -218,6 +218,15 @@ export class ChatbotComponent implements OnInit {
     })
   }
 
+  /**
+   * Processes user input messages and directs them to the appropriate handler
+   * based on the content of the message. It handles navigation requests, login
+   * and logout assistance, registration guidance, item lookups, and general help
+   * inquiries. Provides a fallback response if the message doesn't match any
+   * known commands.
+   *
+   * @param message - The input message from the user.
+   */
   private handleUserInput(message: string) {
     const lowerMessage = message.toLowerCase().trim()
 
@@ -271,6 +280,10 @@ export class ChatbotComponent implements OnInit {
     )
   }
 
+  /**
+   * Handles navigation-related user messages
+   * @param message The user's message
+   */
   private handleNavigation(message: string) {
     if (message.includes("store") || message.includes("homepage")) {
       this.router.navigate(["/"])

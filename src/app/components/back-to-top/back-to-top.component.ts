@@ -32,6 +32,7 @@ export class BackToTopComponent {
   isVisible: boolean = false
 
   @HostListener("window:scroll")
+  //make the button visible when scrolling
   onScroll(): void {
     const scrollTop = document.documentElement.scrollTop
     this.isVisible = scrollTop > 200

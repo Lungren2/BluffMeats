@@ -161,16 +161,31 @@ export class StoreComponent implements OnInit {
     }
   }
 
+  /**
+   * Returns the quantity of an item in the cart.
+   * @param item The item to look up in the cart.
+   * @returns The quantity of the item in the cart, or 0 if the item is not in the cart.
+   */
   getItemQuantityInCart(item: Item): number {
     const cartItem = this.cartItems.find((cartItem) => cartItem.id === item.id)
     return cartItem ? cartItem.quantity : 0
   }
 
+  /**
+   * Returns whether the add-to-cart button should be disabled for the given item.
+   * This is true if the user already has the maximum quantity of the item in their cart.
+   * @param item The item to check.
+   * @returns True if the add-to-cart button should be disabled, false otherwise.
+   */
   isAddToCartDisabled(item: Item): boolean {
     const currentQuantity = this.getItemQuantityInCart(item)
     return currentQuantity >= item.stock_level
   }
 
+  /**
+   * Loads the items from the API and stores them in the component's state.
+   * Additionally, extracts the unique categories and sets up the initial filtering and sorting.
+   */
   loadItems() {
     this.loading = true
     this.error = null
@@ -223,6 +238,11 @@ export class StoreComponent implements OnInit {
     this.sortItems()
   }
 
+  /**
+   * Sorts the filtered items based on the selected sort option.
+   * The items can be sorted by name (alphabetically), price (low to high or high to low),
+   * or stock level (high to low).
+   */
   sortItems() {
     switch (this.sortOption) {
       case "name":
@@ -240,6 +260,12 @@ export class StoreComponent implements OnInit {
     }
   }
 
+  /**
+   * Adds an item to the cart. If the user is not logged in, stores the intended item
+   * in session storage and redirects to the login page. If the user is logged in,
+   * adds the item to the cart and updates the local cart items.
+   * @param item The item to add to the cart
+   */
   addToCart(item: Item) {
     if (!this.isAddToCartDisabled(item)) {
       if (!this.authService.isLoggedIn()) {

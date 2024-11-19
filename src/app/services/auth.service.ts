@@ -38,6 +38,13 @@ export class AuthService {
     return this.currentUserSubject.value
   }
 
+  /**
+   * Log in to the application.
+   * @param email The email of the user.
+   * @param password The password of the user.
+   * @returns An Observable that emits the user information if the login is
+   * successful, or an error if the login fails.
+   */
   login(email: string, password: string) {
     return this.http
       .post<AuthResponse>(`${this.apiUrl}/endpoints/login.php`, {
@@ -54,6 +61,14 @@ export class AuthService {
       )
   }
 
+  /**
+   * Registers a new user with the application.
+   * @param name The name of the new user.
+   * @param email The email of the new user.
+   * @param password The password of the new user.
+   * @returns An Observable that emits the user information if the registration is
+   * successful, or an error if the registration fails.
+   */
   register(name: string, email: string, password: string) {
     return this.http.post<AuthResponse>(
       `${this.apiUrl}/endpoints/register.php`,
@@ -65,6 +80,10 @@ export class AuthService {
     )
   }
 
+  /**
+   * Logs the user out of the application by removing the user's information
+   * from local storage and notifying any subscribers of the user's logout.
+   */
   logout() {
     localStorage.removeItem("currentUser")
     this.currentUserSubject.next(null)

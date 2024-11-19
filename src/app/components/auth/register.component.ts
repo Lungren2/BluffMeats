@@ -156,6 +156,13 @@ export class RegisterComponent {
     return this.registerForm.controls
   }
 
+  /**
+   * Custom validator to check if the password and confirm password values
+   * match.
+   *
+   * @param {FormGroup} fg The form group containing the password and confirm
+   *   password controls.
+   */
   passwordMatchingValidator(fg: FormGroup) {
     const password = fg.get("password")?.value
     const confirmPassword = fg.get("confirmPassword")?.value
@@ -182,7 +189,7 @@ export class RegisterComponent {
     this.authService.register(name, email, password).subscribe({
       next: () => {
         // Optionally show success message
-        this.router.navigate(["/login"])
+        this.router.navigate(["/"])
       },
       error: (error) => {
         this.error =

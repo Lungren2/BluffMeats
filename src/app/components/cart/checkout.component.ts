@@ -248,7 +248,6 @@ export class CheckoutComponent implements OnInit {
     this.updateItemQuantities()
 
     console.log("Order processed:", order)
-    //TODO Add API call to process order
 
     // Clear cart after successful order
     this.cartService.clearCart()

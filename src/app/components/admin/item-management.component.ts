@@ -204,6 +204,12 @@ export class ItemManagementComponent implements OnInit {
     this.isEditMode = true
   }
 
+  /**
+   * Saves the current item to the API.
+   * Validates the form before submission, and handles both new item creation and existing item updates.
+   * If the item is saved successfully, reloads the items list and cancels edit mode.
+   * @param form The form containing the item data to save
+   */
   saveItem(form: NgForm) {
     // Validate form before submission
     if (form.invalid) {
@@ -253,6 +259,12 @@ export class ItemManagementComponent implements OnInit {
     this.isEditMode = true
   }
 
+  /**
+   * Deletes an item from the inventory by ID.
+   * Prompts the user for confirmation before attempting to delete.
+   * Shows a success or error message depending on the outcome.
+   * @param id The ID of the item to delete
+   */
   deleteItem(id: number) {
     if (confirm("Are you sure you want to delete this item?")) {
       this.apiService.deleteItem(id.toString()).subscribe({
